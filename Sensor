@@ -1,0 +1,39 @@
+void Temp_Sen() {
+  sensor_Ds.requestTemperatures();
+  float Celsius = sensor_Ds.getTempCByIndex(0);
+  Read_Sen[0] = Celsius ; // For Real
+  delay(500);
+}
+
+void Dist_Sen() {
+  float distance = sensor_Vl.readRangeContinuousMillimeters();
+  distance = distance_media - (distance / 10);
+  if (sensor_Vl.timeoutOccurred()) {
+    Serial.print(" TIMEOUT VL53L0X");
+  }
+  Read_Sen[1] = distance;
+  delay(500);
+}
+void Soil() {
+
+  soilMoistureValue = analogRead(A0);  //put Sensor insert into soil
+  Read_Sen[2]  = map( soilMoistureValue, AirValue, WaterValue, 0, 100);
+  if ( Read_Sen[2]  > 100)
+  {
+    Read_Sen[2] = 100;
+  }
+  else if ( Read_Sen[2]  < 0)
+  {
+    Read_Sen[2] = 0;
+  }
+  else if ( Read_Sen[2] > 0 && Read_Sen[2] < 100)
+  {
+    Read_Sen[2];
+  }
+  delay(500);
+}
+void Humi_Sen() {
+  float humidity = sensor_Dht.readHumidity();
+  Read_Sen[3] = humidity ;
+  delay(500);
+}
