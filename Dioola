@@ -1,0 +1,47 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+//DS18B20
+#include <Wire.h>
+#include <DallasTemperature.h>
+#define Pin_Temp 13
+OneWire oneWire(Pin_Temp);
+DallasTemperature sensor_Ds(&oneWire);
+
+// VL53l0x
+#include <Wire.h>
+#include <VL53L0X.h>
+#define distance_media 23.0
+VL53L0X sensor_Vl;
+
+//DHT Humidity
+#include <DHT.h>
+DHT sensor_Dht(11, DHT22);
+
+
+//String label = String(" ");
+//int k = 3;
+//unsigned long time_start, time_end, result_time;
+
+float Read_Sen[5];
+void setup()
+{
+  Serial.begin(9600);
+  Wire.begin();
+  sensor_Ds.begin();           // DS18B20
+  sensor_Vl.init();           //  VL53L0X
+  sensor_Vl.setTimeout(500);
+  sensor_Vl.startContinuous();
+  sensor_Dht.begin();         // DHT22
+  lcd.begin();
+}
+void loop()
+{
+  key_pad();
+  Temp_Sen();
+  Dist_Sen();
+  Soil();
+  Humi_Sen();
+  DIS();
+}
