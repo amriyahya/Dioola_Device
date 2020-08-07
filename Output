@@ -1,0 +1,24 @@
+
+void DIS() {
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("TEMP:");
+  lcd.print(Read_Sen[0], 1);
+  lcd.setCursor(0, 1);
+  lcd.print("HIGH:");
+  lcd.print(Read_Sen[1], 1);
+  lcd.setCursor(0, 2);
+  lcd.print("SOIL:");
+  lcd.print(Read_Sen[2]);
+  lcd.setCursor(0, 3);
+  lcd.print("AIR:");
+  lcd.print(Read_Sen[3], 1);
+
+  Serial.println("Output Dioola Bin");
+  Serial.println(Read_Sen[0], 1);
+  Serial.println(Read_Sen[1], 1);
+  Serial.println(Read_Sen[2], 1);
+  Serial.println(Read_Sen[3], 1);
+  Serial.println(Read_Sen[4], 1);
+  
+}
